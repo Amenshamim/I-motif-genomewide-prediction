@@ -1,0 +1,16 @@
+###For genome wide prediction of i-motif with 5 linker length
+source("https://bioconductor.org/biocLite.R")
+biocLite("BSgenome.Hsapiens.UCSC.hg38")
+library(BSgenome.Hsapiens.UCSC.hg38)
+bx<-BSgenome.Hsapiens.UCSC.hg38
+p<-"(a{3}[atcg]{5}c{3}[atcg]{5}c{3}[atcg]{5}c{3})|(c{3}[atcg]{5}c{3}[atcg]{5}c{3}[atcg]{5}a{3})|(t{3}[atcg]{5}g{3}[atcg]{5}g{3}[atcg]{5}g{3})|(g{3}[atcg]{5}g{3}[atcg]{5}g{3}[atcg]{5}t{3})"
+seq<-bx$chr1
+seq1<-as.character(seq)
+x<-gregexpr(p, seq1, perl=TRUE, ignore.case=T)
+z<-regmatches(seq1,x)
+y<-(unlist(x)+attr(x[[1]], 'match.length')[1])
+if(unlist(x)!=-1)
+{
+s<-cbind("chr1","GQ",unlist(x),y-1,unlist(z))
+write.table(s, file="chr1.txt-loop1-3to40.txt", quote=F, sep="\t", row.names=F, col.names=F,append=T)
+}
