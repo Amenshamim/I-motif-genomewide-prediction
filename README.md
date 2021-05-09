@@ -9,4 +9,4 @@ We predict genome wide i-motif using R. We predict i-motifs using three differen
 # How to run the script?
 We used iteration for running the script on all the chromosomes.
 "seq<-bx$chr1" to "seq<-bx$chrx"  
-And repeat this iteration for each chrromosome. 
+And repeat this iteration for each chrromosome in R studio. 
